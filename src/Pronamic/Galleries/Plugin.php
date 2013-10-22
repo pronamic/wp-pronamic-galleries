@@ -31,6 +31,9 @@ class Pronamic_Galleries_Plugin {
 			'menu_name'          => __( 'Galleries', 'pronamic_galleries' ),
 		);
 
+		$slug_pronamic_gallery = get_option( 'pronamic_galleries_post_type_slug' );
+		$slug_pronamic_gallery = ( ! empty( $slug_pronamic_gallery ) ? $slug_pronamic_gallery : _x( 'gallery', 'Gallery Default URI Slug', 'pronamic_galleries' ) );
+		
 		$pronamic_gallery_arguments = array(
 			'labels' => $pronamic_gallery_labels,
 			'public' => true,
@@ -38,12 +41,7 @@ class Pronamic_Galleries_Plugin {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => true,
-			'rewrite' => array( 
-				'slug' => get_option( 
-					'pronamic_galleries_post_type_slug', 
-					_x( 'gallery', 'Gallery Default URI Slug', 'pronamic_galleries' ) 
-				) 
-			),
+			'rewrite' => array( 'slug' => $slug_pronamic_gallery ),
 			'capability_type' => 'post',
 			'has_archive' => true,
 			'hierarchical' => false,
